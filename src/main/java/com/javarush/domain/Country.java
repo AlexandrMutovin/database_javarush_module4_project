@@ -1,15 +1,13 @@
 package com.javarush.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.print.attribute.standard.MediaSize;
+import java.util.Set;
 
 @Entity
 @Table(name = "country")
@@ -27,7 +25,9 @@ public class Country {
     private String code2;
 
     private String name;
+    @Enumerated(EnumType.ORDINAL)
     private Integer continent;
+
     private String region;
 
     @Column(name = "surface_area")
@@ -56,4 +56,12 @@ public class Country {
     private String headOfState;
 
     private Integer capital;
+
+    @OneToOne
+    @JoinColumn(name = "capital")
+    private City city;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "country_id")
+    private Set<CountryLanguage> languages;
 }
