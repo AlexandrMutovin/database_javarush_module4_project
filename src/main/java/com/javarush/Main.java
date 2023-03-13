@@ -77,7 +77,7 @@ public class Main {
 
         properties.put(Environment.URL, "jdbc:p6spy:mysql://localhost:3307/world");
         properties.put(Environment.USER, "root");
-        properties.put(Environment.PASS, "root");
+        properties.put(Environment.PASS, "1234qwea4321");
         properties.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
         properties.put(Environment.HBM2DDL_AUTO, "validate");
         properties.put(Environment.STATEMENT_BATCH_SIZE, "100");
