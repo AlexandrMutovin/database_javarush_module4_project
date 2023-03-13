@@ -1,23 +1,21 @@
 package com.javarush.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import java.math.BigDecimal;
 
+
 @Entity
-@Table(name = "country_language")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(schema = "world", name = "country_language")
 public class CountryLanguage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
     @ManyToOne
@@ -29,6 +27,15 @@ public class CountryLanguage {
     @Column(name = "is_official", columnDefinition = "BIT")
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private Boolean isOfficial;
+
     private BigDecimal percentage;
 
+
+    //Getters and Setters omitted
+    public Boolean getOfficial() {
+        return isOfficial;
+    }
+    public void setOfficial(Boolean isOfficial) {
+        this.isOfficial = isOfficial;
+    }
 }
