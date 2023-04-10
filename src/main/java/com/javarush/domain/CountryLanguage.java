@@ -1,28 +1,41 @@
 package com.javarush.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
+
+import java.math.BigDecimal;
+
 
 @Entity
-@Table(name = "country_language")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(schema = "world", name = "country_language")
 public class CountryLanguage {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
-    @Column(name = "country_id")
-    private Integer countryId;
-    private String language;
-    @Column(name = "is_official")
-    private byte isOfficial;
-    private Double percentage;
 
+    @ManyToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
+
+    private String language;
+
+    @Column(name = "is_official", columnDefinition = "BIT")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private Boolean isOfficial;
+
+    private BigDecimal percentage;
+
+
+    //Getters and Setters omitted
+    public Boolean getOfficial() {
+        return isOfficial;
+    }
+    public void setOfficial(Boolean isOfficial) {
+        this.isOfficial = isOfficial;
+    }
 }

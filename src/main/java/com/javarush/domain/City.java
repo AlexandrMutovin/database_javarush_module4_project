@@ -1,25 +1,29 @@
 package com.javarush.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
 @Entity
-@Table(name = "city")
+@Setter
+@Getter
+@Table(schema = "world", name = "city")
 public class City {
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     private String name;
 
-    @Column(name = "country_id")
-    private Integer countryId;
+    @ManyToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
 
     private String district;
-    private Integer population;
-}
 
+    private Integer population;
+
+
+    //Getters and Setters omitted
+
+}
